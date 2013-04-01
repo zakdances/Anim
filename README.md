@@ -50,7 +50,7 @@ Choose either a NSArray (sequential play) or NSSet (simultaneous play) to repres
 // This timeline will play from left to right. The can also be a NSSet, which will play all Anim instances simultaneously. You don't need to define delay Anims seperately...you just instantiate them with a NSNumber literal.
 NSArray *timeline = @[ [Anim a:@"slideUp" vs:myViews d:.6] , @.2 , [Anim a:@"slideOver" vs:myViews d:.2] ];
    
-[Anim runTimelineSet:timeline];
+[Anim runTimelineArray:timeline];
 
     ```
 
@@ -65,6 +65,8 @@ NSSet *timeline = [NSSet setWithObjects:
                        @[ @.2 , [Anim a:@"fadeIn" vs:buttonBoxes d:.2 i:.2] ] ,
                        [Anim a:@"glow" d:5] ,
                         nil];
+
+[Anim runTimelineSet:timeline];
 ```
 
 
