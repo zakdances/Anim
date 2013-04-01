@@ -52,7 +52,7 @@ NSArray *timeline = @[ [Anim a:@"slideUp" vs:myViews d:.6] , @.2 , [Anim a:@"sli
    
 [Anim runTimelineArray:timeline];
 
-    ```
+```
 
 Your timeline will run now. Great job.
 
