@@ -1,0 +1,7 @@
+ALWAYS_SEARCH_USER_PATHS = YES
+HEADER_SEARCH_PATHS = ${PODS_HEADERS_SEARCH_PATHS}
+OTHER_LDFLAGS = -ObjC -framework AVFoundation -framework AssetsLibrary -framework CoreMedia -framework CoreText -framework CoreVideo -framework QuartzCore
+PODS_BUILD_HEADERS_SEARCH_PATHS = "${PODS_ROOT}/BuildHeaders" "${PODS_ROOT}/BuildHeaders/CaptureRecord" "${PODS_ROOT}/BuildHeaders/MGBox2"
+PODS_HEADERS_SEARCH_PATHS = ${PODS_PUBLIC_HEADERS_SEARCH_PATHS}
+PODS_PUBLIC_HEADERS_SEARCH_PATHS = "${PODS_ROOT}/Headers" "${PODS_ROOT}/Headers/CaptureRecord" "${PODS_ROOT}/Headers/MGBox2"
+PODS_ROOT = ${SRCROOT}/Pods

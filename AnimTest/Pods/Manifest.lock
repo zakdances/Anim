@@ -1,0 +1,13 @@
+PODS:
+  - CaptureRecord (HEAD based on 0.2.4)
+  - MGBox2 (HEAD based on 2.0.0)
+
+DEPENDENCIES:
+  - CaptureRecord (HEAD)
+  - MGBox2 (HEAD)
+
+SPEC CHECKSUMS:
+  CaptureRecord: 31b3224f1d9d3d30f7c1f681e37c88443bc078da
+  MGBox2: 7c09e36c2271f9af16fdb5141a0ca554ecee4d8d
+
+COCOAPODS: 0.17.1

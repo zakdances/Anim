@@ -1,0 +1,1 @@
+../../CaptureRecord/CaptureRecord/CaptureRecord/CRScreenRecorder.h

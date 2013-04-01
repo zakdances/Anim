@@ -11,7 +11,7 @@
 @implementation AnimController
 
 
-- (void)runTimeline:(id)timeline
+- (void)runTimeline:(id)timeline completion:( void ( ^ )() )completion
 {
     
     NSDictionary *info = [self calculateStartTimes:timeline];
@@ -55,6 +55,17 @@
         NSNumber *endTimeB = b[@"endTime"];
         return [endTimeA compare:endTimeB];
     }];
+    
+    
+    
+    
+    CGFloat endOfTimeline = [[IndividualAnimationsOrDelaysArray lastObject][@"endTime"] floatValue];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, endOfTimeline * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        if (completion) {
+            completion();
+        };
+        
+    });
     
 //    TODO: times need to be rounded
 //    NSLog(@"all animations sorted: %@",IndividualAnimationsOrDelaysArray);
@@ -102,6 +113,7 @@
     NSArray *array = [item isKindOfClass:[NSArray class]] ? item : nil;
     NSSet *set = !array && [item isKindOfClass:[NSSet class]] ? item : nil;
     Anim *anim = nil;
+
     if (!array && !set) {
         if ([item isKindOfClass:[NSNumber class]]) {
             anim = [Anim _makeAnonymousDelayAnim:item];
@@ -248,10 +260,10 @@
 //    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 10 * NSEC_PER_SEC), dispatch_get_current_queue(), ^{
 //        NSLog(@"parameter1: %d parameter2: %f", parameter1, parameter2);
 //    });
-    [anim.views enumerateObjectsUsingBlock:^(NSObject *obj, NSUInteger idx, BOOL *stop) {
+    [anim.views enumerateObjectsUsingBlock:^(UIView *view, NSUInteger idx, BOOL *stop) {
         
         
-        UIView *view = obj.weakView;
+        view = [Anim _viewFromValue:view];
         //            NSLog(@"view gotten!");
         if (!view) {
             NSLog(@"view is nill");
@@ -276,12 +288,17 @@
     animations = [animations copy];
     //    Anim *anim = [kAnim copy];
     //    [RACAble(kAnim.test) subscribeNext:^(id x) {
-    [UIView animateWithDuration:duration delay:startTime options:UIViewAnimationOptionCurveEaseOut|UIViewAnimationOptionBeginFromCurrentState  animations:^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, startTime * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+//        NSLog(@"parameter1: %d parameter2: %f", parameter1, parameter2);
+    
+
+    [UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionCurveEaseOut|UIViewAnimationOptionBeginFromCurrentState  animations:^{
         animations(view);
     } completion:^(BOOL finished) {
         //            NSLog(@"animation done!...");
     }];
     
+        });
     //    }];
 }
 

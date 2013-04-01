@@ -1,0 +1,1 @@
+../../CaptureRecord/CaptureRecord/CaptureRecord/CRVideo.h

@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+@class Anim;
 @class AnimController;
 
 //extern AnimController <AnimDelegate> *kAnimController;
@@ -20,8 +21,8 @@ typedef void (^AnimationBlock)(UIView *view);
 @property (strong) NSMutableArray *animDefinitions;
 @property (weak) NSMutableArray *timelines;
 
-- (void)runTimeline:(id)timeline;
-- (void)runAnim:(Anim *)anim;
+- (void)runTimeline:(id)timeline completion:( void ( ^ )() )completion;
+//- (void)runAnim:(Anim *)anim;
 
 - (Anim *)animInGlobalBagNamed:(NSString *)name copy:(BOOL)copy;
 - (void)deleteDuplicateAnimDefinitions;
@@ -79,6 +80,9 @@ typedef void (^AnimationBlock)(UIView *view);
 
 //+ (void)makeAnimSingleton;
 
++ (UIView *)_valueFromView:(UIView *)view;
++ (UIView *)_viewFromValue:(UIView *)view;
+
 //+ (Anim *)anim:(NSString *)name view:(UIView *)view options:(UIViewAnimationOptions)options animations:(AnimationBlock)animations;
 + (Anim *)anim:(NSString *)name options:(UIViewAnimationOptions)options animations:(AnimationBlock)animations;
 
@@ -86,6 +90,9 @@ typedef void (^AnimationBlock)(UIView *view);
 + (void)runOneAnim:(NSString *)anim view:(UIView *)view duration:(CGFloat)duration delay:(CGFloat)delay;
 + (void)runTimelineArray:(NSArray *)timeline;
 + (void)runTimelineSet:(NSSet *)timeline;
++ (void)runTimelineArray:(NSArray *)timeline completion:( void ( ^ )() )completion;
++ (void)runTimelineSet:(NSSet *)timeline completion:( void ( ^ )() )completion;
+
 
 //+ (void)manuallyAnimateView:(UIView *)view startTime:(CGFloat)startTime duration:(CGFloat)duration animations:(AnimationBlock)animations;
 - (void)assignMyDuration:(CGFloat)duration;

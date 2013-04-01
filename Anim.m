@@ -96,9 +96,9 @@ static AnimController <AnimDelegate> *_animCon;
         [NSException raise:@"No anim definition found for that name" format:@"Make sure you've defined an anim with the name '%@'", name];
     }
 
-    [views enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+    [views enumerateObjectsUsingBlock:^(UIView *view, NSUInteger idx, BOOL *stop) {
         
-        [anim.views addObject:[NSObject objectWithWeakView:obj]];
+        [anim.views addObject:[Anim _valueFromView:view]];
         anim.startTimes[idx] = @0.0;
         
     }];
@@ -178,13 +178,22 @@ static AnimController <AnimDelegate> *_animCon;
 
 + (void)runTimelineArray:(NSArray *)timeline
 {
-    [Anim.animCon runTimeline:timeline];
+    [Anim runTimelineArray:timeline completion:nil];
 }
 + (void)runTimelineSet:(NSSet *)timeline
 {
-    [Anim.animCon runTimeline:timeline];
+    [Anim runTimelineSet:timeline completion:nil];
+    
 }
 
++ (void)runTimelineArray:(NSArray *)timeline completion:( void ( ^ )() )completion
+{
+    [Anim.animCon runTimeline:timeline completion:completion];
+}
++ (void)runTimelineSet:(NSSet *)timeline completion:( void ( ^ )() )completion
+{
+    [Anim.animCon runTimeline:timeline completion:completion];
+}
 
 + (void)runOneAnim:(NSString *)anim views:(NSArray *)views duration:(CGFloat)duration delay:(CGFloat)delay
 {
@@ -443,8 +452,16 @@ static AnimController <AnimDelegate> *_animCon;
 //{
 //    kAnimController = animController;
 //}
-
-
++ (UIView *)_valueFromView:(UIView *)view
+{
+//    NSValue *value = [NSValue valueWithNonretainedObject:view];
+    return view;
+}
++ (UIView *)_viewFromValue:(UIView *)view
+{
+    //    NSValue *value = [NSValue valueWithNonretainedObject:view];
+    return view;
+}
 //- (NSMutableDictionary *)animStatusTable
 //{
 //    self.animStatusTable = _animStatusTable ? : [NSMutableDictionary dictionary];

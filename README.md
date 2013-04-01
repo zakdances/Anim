@@ -14,6 +14,17 @@ Core Principle
 
 Anim consists of 2 parts, Anims and Timelines. Anims represent units of time which can contain either animations or emptiness (delays). After defining an Anim, you create instances of it and assign your views to those instances. You can create multiple instances of any anim and assign different views and durations to each.  Anims are instantiated by placing them in Timelines, which are not special objects, but basic NSArrays (for sequential play) or NSSets (for simultaneous play) which you create. The timeline will play its contents of Anims from left to right. Timelines can contain other nested timelines.
 
+Underlying technology
+
+Understand Anim on a deeper level. There's a few things that'll probably set Anim apart from other animation managing libraries:
+
+ - Anim start and end times are calculated individually for each view in every Anim. Many other libraries will, most likely, have each animation listen for the preceding animation to fire some sort of "I'm finished!" event. That's not how Anim works. This allows Anim more flexibily to, for example, assign negative numbers as delays to create overlaps. The Anim motto: dynamic time calculation, not dependencies.
+ 
+ - The trickiest part of making Anim was the "pathing". To calculate start times for each view, Anim has to walk the timeline, which is essentially a "node tree" consisting of nested arrays, sets, and Anim objects. Each Anim needs the relevant path walked to accurately calculate which other anims precedes it, and their respective durations and start times. 
+ 
+ I'm pretty far from being a math whiz, so my approach to pathing is rudimentary. If you can improve, please do so! Pull requests welcome.
+ 
+
 
 Syntax
 
@@ -21,6 +32,7 @@ Step 1 // Define an Anim
 
 ```
 // Create a name, options, and an animation block for your Anim definition.
+
 [Anim anim:@"slideUp" options:UIViewAnimationOptionCurveEaseOut animations:^(UIView *view) {
         view.y += -100;
         view.height += 100;
@@ -37,6 +49,7 @@ Choose either a NSArray (sequential play) or NSSet (simultaneous play) to repres
 
 ```
 // Create a name, options, and an animation block for your Anim definition.
+
 [Anim anim:@"slideUp" options:UIViewAnimationOptionCurveEaseOut animations:^(UIView *view) {
         view.y += -100;
         view.height += 100;
@@ -47,7 +60,9 @@ Choose either a NSArray (sequential play) or NSSet (simultaneous play) to repres
         view.width += 50;
     }];
     
-// This timeline will play from left to right. The can also be a NSSet, which will play all Anim instances simultaneously. You don't need to define delay Anims seperately...you just instantiate them with a NSNumber literal.
+// This timeline will play from left to right. You don't need to define delay Anims seperately...you just instantiate them
+// with a NSNumber literal.
+
 NSArray *timeline = @[ [Anim a:@"slideUp" vs:myViews d:.6] , @.2 , [Anim a:@"slideOver" vs:myViews d:.2] ];
    
 [Anim runTimelineArray:timeline];
@@ -59,21 +74,42 @@ Your timeline will run now. Great job.
 Here's another timeline example that demonstrates a bit more complexity:
 
 ```
-// This NSSet-type timeline contains, at root level, 2 nested timeline arrays (each with their own Anims) and 1 Anim. Because its a NSSet instead of a NSArray, each root item will start simultaneously.
+// This NSSet-type timeline contains, at root level, 2 nested timeline arrays (each with their own Anims) and 1 Anim. 
+// Because it's a NSSet instead of a NSArray, each root item will start simultaneously.
+
 NSSet *timeline = [NSSet setWithObjects:
-                       @[ [Anim a:@"slideUp" vs:buttonBoxes d:.6] , [Anim a:@"rotate" d:.5] ] ,
-                       @[ @.2 , [Anim a:@"fadeIn" vs:buttonBoxes d:.2 i:.2] ] ,
-                       [Anim a:@"glow" d:5] ,
+//                     Nested SubTimeline 1
+                       @[ [Anim a:@"slideUp" vs:buttonBoxes d:.6] , [Anim a:@"rotate" v:myLabel d:.5] ] ,
+//                     Nested SubTimeline 2
+                       @[ @.2 , [Anim a:@"fadeIn" vs:buttonBoxes d:.2] ] ,
+//                     A beautiful glow animation
+                       [Anim a:@"glow" vs:buttonBoxes d:5] ,
                         nil];
 
 [Anim runTimelineSet:timeline];
 ```
 
+Extra Features
 
-Index Offsets
+Index Offset Delays
 
 If you place a number wrapped in a string directly in front of an Anim that contains animations, Anim will assign each view in the that following Anim a delay of that number multiplayed by the views index.
 
-```NSArray *timeline = @[  @".2" , [Anim a:@"slideOver" vs:myViews d:.2] ];```
+```NSArray *timeline = @[  @".2" , [Anim a:@"spin" vs:myViews d:.2] ];```
 
+Negative Delays
+
+You can give any delay Anim a negative duration! Create interesting overlapping animations. Obviously it won't work if it's first in a timeline.
+
+Reuse Anims
+
+Once an Anim is defined, its globally available to your timelines across all view controllers. You can instantiate it where ever you want and assign it new views and durations.
+
+Run One Anim
+
+Just want to run a single Anim? There's a convenience method for you:
+
+```
+[Anim runOneAnim:@"highlight" view:myView duration:2 delay:0];
+```
 
