@@ -24,7 +24,8 @@ Step 1 // Define an Anim
 [Anim anim:@"slideUp" options:UIViewAnimationOptionCurveEaseOut animations:^(UIView *view) {
         view.y += -100;
         view.height += 100;
-    }];```
+    }];
+```
     
     
     
