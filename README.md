@@ -1,4 +1,4 @@
-Anim ◥◣◣◥◣
+Anim ◥◣◣  ◥◣
 ====
 
 The iOS Animation Manager
@@ -113,6 +113,6 @@ Once an Anim is defined, its globally available to your timelines across all vie
 Just want to run a single Anim? There's a convenience method for you:
 
 ```
-[Anim runOneAnim:@"highlight" view:myView duration:2 delay:0];
+[Anim runOneAnim:@"highlight" views:myViews duration:2 delay:0];
 ```
 
