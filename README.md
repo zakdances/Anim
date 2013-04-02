@@ -1,4 +1,4 @@
-Anim ◥◣◣◣◥◣
+Anim ◥◣◣                   ◥◣
 ====
 
 The iOS Animation Manager
