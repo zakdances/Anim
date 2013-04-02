@@ -31,7 +31,7 @@ Understand Anim on a deeper level. There's a few things that'll probably set Ani
 
 ## Syntax
 
-### *Step 1* // Define an Anim
+##### *Step 1* // Define an Anim
 
 ```
 // Create a name, options, and an animation block for your Anim definition.
@@ -44,9 +44,9 @@ Understand Anim on a deeper level. There's a few things that'll probably set Ani
     
     
     
-This will place the definition in a global bag. You don't assign views, delays, or durations here. That's because, in the Anim world, animations are defined seperately from views and durations. You assign those when you instantiate Anims in your timeline. Also, delays are created as seperate Anims, not as attributes (with one small caveat, as you'll see later).
+This will place the definition in a global bag. You don't assign views, delays, or durations here. That's because, in the Anim world, animations are defined seperately from views and durations. You assign those when you instantiate Anims in your timeline. Also, **delays are created as seperate Anims**, not as attributes.
 
-Step 2 // Create a timeline and instantiate Anims inside...then run your timeline.
+##### *Step 2* // Create a timeline and instantiate Anims inside...then run your timeline.
 
 Choose either a NSArray (sequential play) or NSSet (simultaneous play) to represent your timeline.
 
@@ -92,23 +92,23 @@ NSSet *timeline = [NSSet setWithObjects:
 [Anim runTimelineSet:timeline];
 ```
 
-Extra Features
+# Extra Features
 
-Index Offset Delays
+###### Index Offset Delays
 
 If you place a number wrapped in a string directly in front of an Anim that contains animations, Anim will assign each view in that following Anim a delay of that number multiplayed by the views index.
 
 ```NSArray *timeline = @[  @".2" , [Anim a:@"spin" vs:myViews d:.2] ];```
 
-Negative Delays
+###### Negative Delays
 
 You can give any delay Anim a negative duration! Create interesting overlapping animations. Obviously it won't work if it's first in a timeline.
 
-Reuse Anims
+###### Reuse Anims
 
 Once an Anim is defined, its globally available to your timelines across all view controllers. You can instantiate it where ever you want and assign it new views and durations.
 
-Run One Anim
+###### Run One Anim
 
 Just want to run a single Anim? There's a convenience method for you:
 
