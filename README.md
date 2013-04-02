@@ -5,7 +5,7 @@ The iOS Animation Manager
 
 Anim allows you to create simple, declarative timelines which can run complex chains of user interface animation as defined by you.
 
-http://www.youtube.com/watch?v=2mkFD-H-uRg
+https://github.com/zakdances/Anim/blob/master/AnimTest/anim.gif
 
 History and Purpose
 
