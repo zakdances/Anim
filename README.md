@@ -5,7 +5,7 @@ The iOS Animation Manager
 
 Anim allows you to create simple, declarative timelines which can run complex chains of user interface animation as defined by you.
 
-![Anim demo](/blob/master/AnimTest/anim.gif?raw=true)
+![Anim demo](/AnimTest/anim.gif?raw=true)
 
 
 History and Purpose
@@ -31,7 +31,7 @@ Understand Anim on a deeper level. There's a few things that'll probably set Ani
 
 ## Syntax
 
-### __Step 1__ // Define an Anim
+### *Step 1* // Define an Anim
 
 ```
 // Create a name, options, and an animation block for your Anim definition.
@@ -44,7 +44,7 @@ Understand Anim on a deeper level. There's a few things that'll probably set Ani
     
     
     
-This will place the definition in a global bag. Please notice how you don't assign views, delays, or durations. That's because, in the Anim world, animations are defined seperately from views and durations. You assign those when you instantiate Anims in your timeline. Also in the Anim world, delays are created as seperate Anims, not as attributes (with one small caveat, as you'll see later).
+This will place the definition in a global bag. You don't assign views, delays, or durations here. That's because, in the Anim world, animations are defined seperately from views and durations. You assign those when you instantiate Anims in your timeline. Also, delays are created as seperate Anims, not as attributes (with one small caveat, as you'll see later).
 
 Step 2 // Create a timeline and instantiate Anims inside...then run your timeline.
 
@@ -96,7 +96,7 @@ Extra Features
 
 Index Offset Delays
 
-If you place a number wrapped in a string directly in front of an Anim that contains animations, Anim will assign each view in the that following Anim a delay of that number multiplayed by the views index.
+If you place a number wrapped in a string directly in front of an Anim that contains animations, Anim will assign each view in that following Anim a delay of that number multiplayed by the views index.
 
 ```NSArray *timeline = @[  @".2" , [Anim a:@"spin" vs:myViews d:.2] ];```
 
