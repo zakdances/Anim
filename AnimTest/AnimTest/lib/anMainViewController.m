@@ -15,6 +15,7 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:a]
 
 #import "anMainViewController.h"
 #import "Anim.h"
+#import "SRScreenRecorder.h"
 
 @interface anMainViewController ()
 
@@ -47,8 +48,27 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:a]
 {
     [super viewWillAppear:animated];
     
-    [[CRRecorder sharedRecorder] setOptions:0];
-    [[CRRecorder sharedRecorder] start:nil];
+//    [[CRRecorder sharedRecorder] setOptions:0];
+//    [[CRRecorder sharedRecorder] start:nil];
+    
+    
+//    NSURL *documentsURL = [NSURL URLWithString:[self documentsDirectory]];
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSArray *fileArray = [fileManager contentsOfDirectoryAtPath:[self documentsDirectory] error:nil];
+    for (NSString *filename in fileArray)  {
+        
+        [fileManager removeItemAtPath:[[self documentsDirectory] stringByAppendingPathComponent:filename] error:NULL];
+    }
+
+
+    SRScreenRecorder *recorder = [SRScreenRecorder sharedInstance];
+    self.screenRecorder = recorder;
+    self.screenRecorder.filenameBlock = ^(void) {
+        return @"screencast.mov";
+    };
+    [self.screenRecorder startRecording];
+    
     
 }
 
@@ -113,12 +133,28 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:a]
     [Anim runTimelineSet:timeline completion:^{
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 2 * NSEC_PER_SEC), dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             NSLog(@"Stopping screen recording");
-            [[CRRecorder sharedRecorder] stop:nil];
-            [[CRRecorder sharedRecorder] saveVideoToAlbumWithResultBlock:^(NSURL *URL) {
-                NSLog(@"video saved");
-            } failureBlock:^(NSError *error) {
-                NSLog(@"Saving video FAILED! :( %@",error);
+//            [[CRRecorder sharedRecorder] stop:nil];
+//            [[CRRecorder sharedRecorder] saveVideoToAlbumWithResultBlock:^(NSURL *URL) {
+//                NSLog(@"video saved");
+//            } failureBlock:^(NSError *error) {
+//                NSLog(@"Saving video FAILED! :( %@",error);
+//            }];
+            [self.screenRecorder stopRecording];
+            
+            NSURL *vidURL = [[NSURL URLWithString:[self documentsDirectory]] URLByAppendingPathComponent:@"screencast.mov"];
+//            NSLog(@"video doc URL: %@",vidURL);
+            
+            NSFileManager *fileManager = [NSFileManager defaultManager];
+            NSArray *fileArray = [fileManager contentsOfDirectoryAtPath:[self documentsDirectory] error:nil];
+            // NSDirectoryEnumerationSkipsSubdirectoryDescendants
+            ALAssetsLibrary* library = [[ALAssetsLibrary alloc] init];
+            [library writeVideoAtPathToSavedPhotosAlbum:vidURL completionBlock:^(NSURL *assetURL, NSError *error) {
+                NSLog(@"asset URL: %@",assetURL);
             }];
+            
+            fileArray = [fileManager contentsOfDirectoryAtPath:[self documentsDirectory] error:nil];
+            NSLog(@"new documents: %@",fileArray);
+//            self.screenRecorder = nil;
         });
     }];
     
@@ -160,6 +196,14 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:a]
 //        [self.view addSubview:view];
     };
     return bars;
+}
+
+
+- (NSString *)documentsDirectory
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
+    return basePath;
 }
 
 @end

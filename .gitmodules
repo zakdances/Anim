@@ -1,0 +1,3 @@
+[submodule "AnimTest/AnimTest/lib/temp/ScreenRecorder"]
+	path = AnimTest/AnimTest/lib/temp/ScreenRecorder
+	url = https://github.com/kishikawakatsumi/ScreenRecorder.git

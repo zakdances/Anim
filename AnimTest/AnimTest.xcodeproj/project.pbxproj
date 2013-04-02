@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		05E2F0ADAA894E92A56F39EF /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D024AFE3CE74A5BBB79117C /* libPods.a */; };
+		310CAA00170B1B1500A2AFF4 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 310CA9E3170B1B1400A2AFF4 /* .gitignore */; };
+		310CAA01170B1B1500A2AFF4 /* SRScreenRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 310CA9E6170B1B1400A2AFF4 /* SRScreenRecorder.m */; };
+		310CAA0E170B1B1500A2AFF4 /* KTouchPointerWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 310CA9FF170B1B1500A2AFF4 /* KTouchPointerWindow.m */; };
 		312FEA5B17098FC300FC66F4 /* Anim.m in Sources */ = {isa = PBXBuildFile; fileRef = 312FEA5717098FC300FC66F4 /* Anim.m */; };
 		312FEA5C17098FC300FC66F4 /* AnimController.m in Sources */ = {isa = PBXBuildFile; fileRef = 312FEA5917098FC300FC66F4 /* AnimController.m */; };
 		312FEA5D17098FC300FC66F4 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 312FEA5A17098FC300FC66F4 /* README.md */; };
@@ -26,6 +29,11 @@
 
 /* Begin PBXFileReference section */
 		1D024AFE3CE74A5BBB79117C /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		310CA9E3170B1B1400A2AFF4 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		310CA9E5170B1B1400A2AFF4 /* SRScreenRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRScreenRecorder.h; sourceTree = "<group>"; };
+		310CA9E6170B1B1400A2AFF4 /* SRScreenRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRScreenRecorder.m; sourceTree = "<group>"; };
+		310CA9FE170B1B1500A2AFF4 /* KTouchPointerWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTouchPointerWindow.h; sourceTree = "<group>"; };
+		310CA9FF170B1B1500A2AFF4 /* KTouchPointerWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTouchPointerWindow.m; sourceTree = "<group>"; };
 		312FEA5617098FC300FC66F4 /* Anim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Anim.h; path = ../../Anim.h; sourceTree = "<group>"; };
 		312FEA5717098FC300FC66F4 /* Anim.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Anim.m; path = ../../Anim.m; sourceTree = "<group>"; };
 		312FEA5817098FC300FC66F4 /* AnimController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AnimController.h; path = ../../AnimController.h; sourceTree = "<group>"; };
@@ -65,6 +73,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		310CA9E2170B1B1400A2AFF4 /* ScreenRecorder */ = {
+			isa = PBXGroup;
+			children = (
+				310CA9E3170B1B1400A2AFF4 /* .gitignore */,
+				310CA9E4170B1B1400A2AFF4 /* Lib */,
+				310CA9FD170B1B1500A2AFF4 /* Vendor */,
+			);
+			name = ScreenRecorder;
+			path = lib/temp/ScreenRecorder;
+			sourceTree = "<group>";
+		};
+		310CA9E4170B1B1400A2AFF4 /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+				310CA9E5170B1B1400A2AFF4 /* SRScreenRecorder.h */,
+				310CA9E6170B1B1400A2AFF4 /* SRScreenRecorder.m */,
+			);
+			path = Lib;
+			sourceTree = "<group>";
+		};
+		310CA9FD170B1B1500A2AFF4 /* Vendor */ = {
+			isa = PBXGroup;
+			children = (
+				310CA9FE170B1B1500A2AFF4 /* KTouchPointerWindow.h */,
+				310CA9FF170B1B1500A2AFF4 /* KTouchPointerWindow.m */,
+			);
+			path = Vendor;
+			sourceTree = "<group>";
+		};
 		316C13F017096C95002379D0 = {
 			isa = PBXGroup;
 			children = (
@@ -97,6 +134,7 @@
 		316C140217096C95002379D0 /* AnimTest */ = {
 			isa = PBXGroup;
 			children = (
+				310CA9E2170B1B1400A2AFF4 /* ScreenRecorder */,
 				316C142017098A66002379D0 /* Anim */,
 				316C140B17096C95002379D0 /* zdTestAppDelegate.h */,
 				316C140C17096C95002379D0 /* zdTestAppDelegate.m */,
@@ -210,6 +248,7 @@
 				316C141317096C95002379D0 /* Default-568h@2x.png in Resources */,
 				316C141C170988CE002379D0 /* dashboardBG@2x.png in Resources */,
 				312FEA5D17098FC300FC66F4 /* README.md in Resources */,
+				310CAA00170B1B1500A2AFF4 /* .gitignore in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -242,6 +281,8 @@
 				316C141F17098A30002379D0 /* anMainViewController.m in Sources */,
 				312FEA5B17098FC300FC66F4 /* Anim.m in Sources */,
 				312FEA5C17098FC300FC66F4 /* AnimController.m in Sources */,
+				310CAA01170B1B1500A2AFF4 /* SRScreenRecorder.m in Sources */,
+				310CAA0E170B1B1500A2AFF4 /* KTouchPointerWindow.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
