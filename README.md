@@ -1,4 +1,4 @@
-Anim
+Anim ◥◣◣◥◣
 ====
 
 The iOS Animation Manager
@@ -29,9 +29,9 @@ Understand Anim on a deeper level. There's a few things that'll probably set Ani
  
 
 
-Syntax
+## Syntax
 
-Step 1 // Define an Anim
+### __Step 1__ // Define an Anim
 
 ```
 // Create a name, options, and an animation block for your Anim definition.
