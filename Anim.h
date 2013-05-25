@@ -7,6 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "UIViewPlus.h"
+#import "CAGradientLayerPlus.h"
+#import "CAShapeLayerPlus.h"
+
 @class Anim;
 @class AnimController;
 
@@ -66,6 +70,7 @@ typedef void (^AnimationBlock)(UIView *view);
 //+ (Anim *)a:(NSString *)name vs:(NSArray *)views d:(CGFloat)duration;
 //+ (Anim *)a:(NSString *)name v:(UIView *)view d:(CGFloat)duration;
 + (Anim *)a:(NSString *)name vs:(NSArray *)views d:(CGFloat)duration;
++ (Anim *)a:(NSString *)name v:(UIView *)view d:(CGFloat)duration;
 + (Anim *)d_n:(NSString *)name;
 + (Anim *)di_n:(NSString *)name;
 //+ (Anim *)d:(NSString *)name d:(CGFloat)duration;

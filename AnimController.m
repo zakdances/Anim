@@ -273,7 +273,7 @@
             CGFloat startTime = [anim.startTimes[idx] floatValue];
             CGFloat duration = [anim.durations[idx] floatValue];
             
-            [self manuallyAnimateView:view startTime:startTime duration:duration animations:anim.animations];
+            [self manuallyAnimateView:view startTime:startTime duration:duration options:anim.options animations:anim.animations];
         }
     }];
     
@@ -281,25 +281,28 @@
 
 
 
-- (void)manuallyAnimateView:(UIView *)view startTime:(CGFloat)startTime duration:(CGFloat)duration animations:(AnimationBlock)animations
+- (void)manuallyAnimateView:(UIView *)view startTime:(CGFloat)startTime duration:(CGFloat)duration options:(UIViewAnimationOptions)options animations:(AnimationBlock)animations
 {
     //    __weak UIView *weakView = view;
     
     animations = [animations copy];
+  //  NSLog(@"view: %@",view);
     //    Anim *anim = [kAnim copy];
-    //    [RACAble(kAnim.test) subscribeNext:^(id x) {
+
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, startTime * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
 //        NSLog(@"parameter1: %d parameter2: %f", parameter1, parameter2);
     
-
-    [UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionCurveEaseOut|UIViewAnimationOptionBeginFromCurrentState  animations:^{
+//    NSLog(@"got this far...");
+    [UIView animateWithDuration:duration delay:0 options:options animations:^{
         animations(view);
+       // view.layer.transform = CATransform3DIdentity;
+      //  view.alpha = 1;
     } completion:^(BOOL finished) {
         //            NSLog(@"animation done!...");
     }];
     
-        });
-    //    }];
+    });
+ 
 }
 
 

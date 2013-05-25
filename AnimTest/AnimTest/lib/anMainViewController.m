@@ -54,20 +54,7 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:a]
     
 //    NSURL *documentsURL = [NSURL URLWithString:[self documentsDirectory]];
     
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSArray *fileArray = [fileManager contentsOfDirectoryAtPath:[self documentsDirectory] error:nil];
-    for (NSString *filename in fileArray)  {
-        
-        [fileManager removeItemAtPath:[[self documentsDirectory] stringByAppendingPathComponent:filename] error:NULL];
-    }
-
-
-    SRScreenRecorder *recorder = [SRScreenRecorder sharedInstance];
-    self.screenRecorder = recorder;
-    self.screenRecorder.filenameBlock = ^(void) {
-        return @"screencast.mov";
-    };
-    [self.screenRecorder startRecording];
+    
     
     
 }
@@ -139,22 +126,8 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:a]
 //            } failureBlock:^(NSError *error) {
 //                NSLog(@"Saving video FAILED! :( %@",error);
 //            }];
-            [self.screenRecorder stopRecording];
             
-            NSURL *vidURL = [[NSURL URLWithString:[self documentsDirectory]] URLByAppendingPathComponent:@"screencast.mov"];
-//            NSLog(@"video doc URL: %@",vidURL);
-            
-            NSFileManager *fileManager = [NSFileManager defaultManager];
-            NSArray *fileArray = [fileManager contentsOfDirectoryAtPath:[self documentsDirectory] error:nil];
-            // NSDirectoryEnumerationSkipsSubdirectoryDescendants
-            ALAssetsLibrary* library = [[ALAssetsLibrary alloc] init];
-            [library writeVideoAtPathToSavedPhotosAlbum:vidURL completionBlock:^(NSURL *assetURL, NSError *error) {
-                NSLog(@"asset URL: %@",assetURL);
-            }];
-            
-            fileArray = [fileManager contentsOfDirectoryAtPath:[self documentsDirectory] error:nil];
-            NSLog(@"new documents: %@",fileArray);
-//            self.screenRecorder = nil;
+
         });
     }];
     
@@ -206,4 +179,42 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:a]
     return basePath;
 }
 
+
+
+- (void)startRecording
+{
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSArray *fileArray = [fileManager contentsOfDirectoryAtPath:[self documentsDirectory] error:nil];
+    for (NSString *filename in fileArray)  {
+        
+        [fileManager removeItemAtPath:[[self documentsDirectory] stringByAppendingPathComponent:filename] error:NULL];
+    }
+    
+    
+    SRScreenRecorder *recorder = [SRScreenRecorder sharedInstance];
+    self.screenRecorder = recorder;
+    self.screenRecorder.filenameBlock = ^(void) {
+        return @"screencast.mov";
+    };
+    [self.screenRecorder startRecording];
+}
+
+- (void)stopRecording
+{
+    [self.screenRecorder stopRecording];
+    
+    NSURL *vidURL = [[NSURL URLWithString:[self documentsDirectory]] URLByAppendingPathComponent:@"screencast.mov"];
+    
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSArray *fileArray = [fileManager contentsOfDirectoryAtPath:[self documentsDirectory] error:nil];
+    
+    ALAssetsLibrary* library = [[ALAssetsLibrary alloc] init];
+    [library writeVideoAtPathToSavedPhotosAlbum:vidURL completionBlock:^(NSURL *assetURL, NSError *error) {
+        NSLog(@"asset URL: %@",assetURL);
+    }];
+    
+    fileArray = [fileManager contentsOfDirectoryAtPath:[self documentsDirectory] error:nil];
+    NSLog(@"new documents: %@",fileArray);
+}
 @end

@@ -29,11 +29,7 @@ static AnimController <AnimDelegate> *_animCon;
     return self;
 }
 
-+ (void)makeAnimSingleton
-{
-    
-    
-}
+
 
 
 
@@ -89,7 +85,7 @@ static AnimController <AnimDelegate> *_animCon;
 + (Anim *)a:(NSString *)name vs:(NSArray *)views d:(CGFloat)duration
 {
 //    [self makeAnimSingleton];
-    duration = duration ? : 0.0;
+  //  duration = duration ? : 0.0;
 //    NSLog(@"anims defined: %@",Anim.animCon.animDefinitions);
     Anim *anim = [Anim.animCon animInGlobalBagNamed:name copy:YES];
     if (!anim) {
@@ -299,7 +295,7 @@ static AnimController <AnimDelegate> *_animCon;
 - (void)start
 {
 //    Send RAC signal
-    NSString *test = @"asd";
+  //  NSString *test = @"asd";
 //    self.test = test;
 }
 
