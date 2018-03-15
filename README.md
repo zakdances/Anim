@@ -1,6 +1,6 @@
 # Anim ◥◣◣ ◥◣
 
-**This project has been depreciated because I don't have time to maintain it. Thank you to all the contributers.**
+## **This project has been depreciated because I don't have time to maintain it. Thank you to all the contributers.**
 
 The iOS Animation Manager
 
