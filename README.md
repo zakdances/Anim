@@ -1,4 +1,4 @@
-# Anim ◥◣◣ ◥◣
+# Anim ◥◣◣ ◥◣ (project depreciated)
 
 ## **This project has been depreciated because I don't have time to maintain it. Thank you to all the contributers.**
 
