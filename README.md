@@ -1,6 +1,8 @@
-# Anim ◥◣◣ ◥◣ (project depreciated)
 
-## **This project has been depreciated because I don't have time to port to Swift. Thank you to all the contributers.**
+
+# Anim ◥◣◣ ◥◣ (project deprecated)
+
+## **This project has been deprecated because I don't have time to port to Swift. Thank you to all the contributors.**
 
 The iOS Animation Manager
 
